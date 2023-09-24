@@ -1,3 +1,4 @@
+const cart = []
 const Laptops = [
     {
         id: 1,
@@ -15,7 +16,7 @@ const Laptops = [
     },
 
     {
-        id: 1,
+        id: 2,
         name: "PRO",
         baseprice: 800,
         RAM: [
@@ -30,7 +31,7 @@ const Laptops = [
     },
 
     {
-        id: 1,
+        id: 3,
         name: "ULTRA",
         baseprice: 1000,
         RAM: [
@@ -46,23 +47,38 @@ const Laptops = [
 
 ]
 
-function main() {
+
+
+function display() { //To display the contents inside Laptops array
     for (var i of Laptops) {
         console.log(i);
     }
 
 }
 
-const cart  = {
-    laptopId: 1,
-    RAMSize: "8GB",
-    storageSize: "256GB" 
-}
-
-console.log(cart.laptopId);
 function addToCart(laptopId, RAMSize, storageSize) {
-    x = prompt()
-    
-
+    cart.push({
+        laptopId: laptopId,
+        RAM: RAMSize,
+        storage: storageSize
+    })
+    console.log(`The configuration with laptopId = ${laptopId} is saved.\nThe items in cart: `); //Use backquotes to use format
+    for (let i of cart) {
+        console.log(i);
+    }
 }
+
+function removeFromCart(laptopId) {
+    for (let i in cart) {
+        if (cart[i].laptopId == laptopId) {
+            cart.splice(i,1);
+            console.log(`The configuration with laptopId = ${i} was removed.Your current cart is: `);
+            console.log(cart);
+        }
+    }
+    }
+
+addToCart(1 , "64GB" , "2TB");
+
+
 main();
