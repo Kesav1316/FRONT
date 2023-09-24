@@ -57,11 +57,11 @@ function display() { //To display the contents inside Laptops array
 }
 
 function addToCart(laptopId, RAMSize, storageSize) {
-    cart.push({
-        laptopId: laptopId,
-        RAM: RAMSize,
-        storage: storageSize
-    })
+        cart.push({
+            laptopId: laptopId,
+            RAM: RAMSize,
+            storage: storageSize
+        })
     console.log(`The configuration with laptopId = ${laptopId} is saved.\nThe items in cart: `); //Use backquotes to use format
     for (let i of cart) {
         console.log(i);
@@ -91,9 +91,33 @@ function removeFromCart(laptopId) {
     }
 
 
-function calculateTotal() {
-    
+function calculateTotal(cart, laptops) {
+    let total = 0;
+
+    for (const item of cart) {
+        const laptop = laptops.find(l => l.id === item.laptopId);
+
+        if (!laptop) {
+            console.error(`Laptop with ID ${item.laptopId} not found`);
+            continue;
+        }
+
+        const selectedRAM = laptop.RAM.find(ram => ram.size === item.RAM);
+        const selectedStorage = laptop.STORAGE.find(storage => storage.size === item.storage);
+
+        if (!selectedRAM || !selectedStorage) {
+            console.error(`RAM or storage configuration not found for laptop with ID ${item.laptopId}`);
+            continue;
+        }
+
+        total += laptop.baseprice + selectedRAM.price + selectedStorage.price;
+    }
+
+    console.log(`The total price is ${total}`);
 }
 
-addToCart(1 , "64GB" , "2TB");
-removeFromCart(2);
+const totalPrice = calculateTotal(cart, Laptops);
+console.log("Total Price:", totalPrice);
+
+addToCart(1 , "16GB" , "512GB");
+calculateTotal(cart, Laptops);
