@@ -71,14 +71,29 @@ function addToCart(laptopId, RAMSize, storageSize) {
 function removeFromCart(laptopId) {
     for (let i in cart) {
         if (cart[i].laptopId == laptopId) {
-            cart.splice(i,1);
+            cart.splice(i,1); //Deleting element of array in index 
             console.log(`The configuration with laptopId = ${i} was removed.Your current cart is: `);
-            console.log(cart);
+
+            if (cart.length !=0) {
+                for (let j of cart) {
+                    console.log(j);
+                }
+            }
+            else {
+                console.log("Cart is empty");
+            }
+
+        }
+        else {
+            console.log(`Configuration with laptopId = ${i} is not found`);
         }
     }
     }
 
+
+function calculateTotal() {
+    
+}
+
 addToCart(1 , "64GB" , "2TB");
-
-
-main();
+removeFromCart(2);
