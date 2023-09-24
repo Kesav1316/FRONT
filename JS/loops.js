@@ -1,5 +1,9 @@
 console.log("LOOPING")
 
+//let - used only in local block and cannot be redeclared and do not work outside block
+//var = used in global and works outside block
+//const = read only and works outside block 
+
 //FOR LOOPING
 function main() {
     for (var i = 0;i<11; i++) { // let - cannot be redeclared var - can be redeclared
