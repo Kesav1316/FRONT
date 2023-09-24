@@ -49,11 +49,18 @@ const Laptops = [
 
 
 
-function display() { //To display the contents inside Laptops array
-    for (var i of Laptops) {
+function display_menu() { //To display the contents inside Laptops array
+    for (let i of Laptops) {
         console.log(i);
     }
 
+}
+
+
+function display_cart() {
+    for (let i of cart) {
+        console.log(i)
+    }
 }
 
 function addToCart(laptopId, RAMSize, storageSize) {
@@ -62,33 +69,22 @@ function addToCart(laptopId, RAMSize, storageSize) {
             RAM: RAMSize,
             storage: storageSize
         })
-    console.log(`The configuration with laptopId = ${laptopId} is saved.\nThe items in cart: `); //Use backquotes to use format
-    for (let i of cart) {
-        console.log(i);
-    }
+        console.log(`The configuration with laptopId = ${laptopId} is saved.\nThe items in cart: `); //Use backquotes to use format
+        display_cart();
 }
 
-function removeFromCart(laptopId) {
-    for (let i in cart) {
-        if (cart[i].laptopId == laptopId) {
-            cart.splice(i,1); //Deleting element of array in index 
-            console.log(`The configuration with laptopId = ${i} was removed.Your current cart is: `);
-
+function removeFromCart(index) {
+            cart.splice(index,1); //Deleting element of array in index 
+            console.log(`The configuration in index $${i} was removed.Your current cart is: `);
             if (cart.length !=0) {
-                for (let j of cart) {
-                    console.log(j);
-                }
+                display_cart();
             }
             else {
                 console.log("Cart is empty");
             }
 
         }
-        else {
-            console.log(`Configuration with laptopId = ${i} is not found`);
-        }
-    }
-    }
+
 
 
 function calculateTotal(cart, laptops) {
@@ -116,8 +112,60 @@ function calculateTotal(cart, laptops) {
     console.log(`The total price is ${total}`);
 }
 
-const totalPrice = calculateTotal(cart, Laptops);
-console.log("Total Price:", totalPrice);
+/* function calculateTotal() {
+    const cartTotals = dumbCart.reduce((cartTotal, currentValue) => {
+        const dumbProduct = dumbProducts.find((dumbProduct) => {
+          return currentValue.laptopID === dumbProduct.id;
+        });
+      
+        if (dumbProduct) {
+          const myRam = dumbProduct.RAM.find((objVal) => {
+            return currentValue.ramSize === objVal.size;
+          })?.price;
+      
+          const ramPrice = myRam || 0;
+      
+          const mySSD = dumbProduct.STORAGE.find((objVal) => {
+            return currentValue.ramSize === objVal.size;
+          })?.price;
+      
+          const ssdPrice = mySSD || 0;
+      
+          return cartTotal + ramPrice + ssdPrice;
+        }
+        return cartTotal;
+      }, 0)
+} */
 
-addToCart(1 , "16GB" , "512GB");
-calculateTotal(cart, Laptops);
+
+while (true) {
+    let x = prompt("Enter the operation: \n1)Add to cart \n2)Remove from cart \n3)Calculate \n4)Break ");
+    if (x == "1") {
+        display_cart()
+        let id = prompt("Enter the laptop id:  ");
+        let rams = prompt("Enter the size of ram: ");
+        let storage = prompt("Enter the size of storage: ");
+        let id1 = parseInt(id,10);
+        addToCart(id1, rams, storage);                                      
+
+    }
+
+    else if (x == "2") {
+        display_cart();
+        let id = prompt("Enter the index to delete: ");
+        let x = parseInt(id,10);
+        removeFromCart(x);
+        
+    }
+
+
+    else if (x == "3") {
+        display_cart();
+        calculateTotal(cart,Laptops);
+    }
+
+    else if (x == "4") {
+        break;
+    }
+
+}
