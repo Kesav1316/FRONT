@@ -61,6 +61,7 @@ const cart  = {
 
 console.log(cart.laptopId);
 function addToCart(laptopId, RAMSize, storageSize) {
+    x = prompt()
     
 
 }
