@@ -7,4 +7,4 @@ function main() {
     alert("Hi ig "); //To show message in pop up
 }
 
-main()
+main();

@@ -17,4 +17,4 @@ function main1(grade) {
 
 }
 
-main1(90)
+main1(90);
