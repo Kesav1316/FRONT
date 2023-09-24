@@ -45,3 +45,13 @@ const Laptops = [
     },
 
 ]
+
+function main() {
+    for (var i of Laptops) {
+        console.log(i);
+    }
+
+}
+
+
+main();
