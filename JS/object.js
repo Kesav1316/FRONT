@@ -19,7 +19,21 @@ const cart2  = {
     storageSize: [] 
 }
 
-cart2.laptopId.push(2); //Appends a new value to the cart with same key 
-cart2.RAMSize.push("8GB"); //Appends a new value to the cart
+cart2.laptopId.push(2); //Appends a new value to the cart inside array of key 
+cart2.RAMSize.push("8GB"); 
 
-console.log(cart2);
+//To push as a seperate object
+
+const cart4  = []  //Created as array
+
+
+//cart4.push(<object>>)
+
+cart4.push({
+    laptopId: 2,
+    RAM: "8GB",
+    storage: "256GB"
+});
+console.log(cart4); //To print the array
+console.log(cart4[0]); //To print the first element in array
+console.log(cart4[0].laptopId); //To print the value of key in first element in array 
