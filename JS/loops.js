@@ -22,3 +22,17 @@ function main1() {
 
 
 main1();
+
+//DO LOOPING
+function main2() {
+    var i = 0;
+    do {
+        console.log(i);
+        i++;
+    }
+    while (i<11);
+
+}
+
+
+main2();
