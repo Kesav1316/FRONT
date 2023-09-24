@@ -53,5 +53,15 @@ function main() {
 
 }
 
+const cart  = {
+    laptopId: 1,
+    RAMSize: "8GB",
+    storageSize: "256GB" 
+}
 
+console.log(cart.laptopId);
+function addToCart(laptopId, RAMSize, storageSize) {
+    
+
+}
 main();
