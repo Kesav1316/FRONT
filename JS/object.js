@@ -29,11 +29,13 @@ const cart4  = []  //Created as array
 
 //cart4.push(<object>>)
 
-cart4.push({
+cart4.push([
+    {
     laptopId: 2,
     RAM: "8GB",
     storage: "256GB"
-});
+    }
+]);
 console.log(cart4); //To print the array
 console.log(cart4[0]); //To print the first element in array
 console.log(cart4[0].laptopId); //To print the value of key in first element in array 

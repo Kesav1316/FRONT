@@ -59,9 +59,23 @@ function display_menu() { //To display the contents inside Laptops array
 
 function display_cart() {
     for (let i of cart) {
-        console.log(i)
+        console.log(`LAPTOPID: ${i.laptopId} \nRAM: ${i.RAM} \nSTORAGE: ${i.storage}`);
     }
 }
+
+
+function displayconfig() {
+    for (let i of Laptops) {
+        console.log(`LaptopID: ${i["id"]} \nLaptopname: ${i["name"]} \nBaseprice: ${i["baseprice"]}`);
+        for (let j=0;j<2;j++) {
+            console.log(`RAM: ${i["RAM"][j].size} - PRICE: ${i["RAM"][j].price}`);
+        }
+        for (let j = 0;j<2;j++) {
+            console.log(`TYPE: ${i["STORAGE"][j].type} SIZE: ${i["STORAGE"][j].size} - PRICE: ${i["STORAGE"][j].price}`);
+        }
+    }
+}
+
 
 function addToCart(laptopId, RAMSize, storageSize) {
         cart.push({
@@ -75,7 +89,7 @@ function addToCart(laptopId, RAMSize, storageSize) {
 
 function removeFromCart(index) {
             cart.splice(index,1); //Deleting element of array in index 
-            console.log(`The configuration in index $${i} was removed.Your current cart is: `);
+            console.log(`The configuration in index ${index} was removed.Your current cart is: `);
             if (cart.length !=0) {
                 display_cart();
             }
@@ -86,85 +100,66 @@ function removeFromCart(index) {
         }
 
 
-
+    
 function calculateTotal(cart, laptops) {
     let total = 0;
-
+        
     for (const item of cart) {
         const laptop = laptops.find(l => l.id === item.laptopId);
-
+        
         if (!laptop) {
-            console.error(`Laptop with ID ${item.laptopId} not found`);
-            continue;
-        }
-
+                console.log(`Laptop with ID ${item.laptopId} not found`);
+                continue;
+            }
+        
         const selectedRAM = laptop.RAM.find(ram => ram.size === item.RAM);
         const selectedStorage = laptop.STORAGE.find(storage => storage.size === item.storage);
-
-        if (!selectedRAM || !selectedStorage) {
-            console.error(`RAM or storage configuration not found for laptop with ID ${item.laptopId}`);
+        
+        if (!selectedRAM) {
+            console.log(`RAM or storage configuration not found`);
             continue;
         }
 
+        else if (!selectedStorage) {
+            console.log(`STORAGE configuration not found`);
+            continue;
+        }
+        
         total += laptop.baseprice + selectedRAM.price + selectedStorage.price;
     }
-
+        
     console.log(`The total price is ${total}`);
 }
-
-/* function calculateTotal() {
-    const cartTotals = dumbCart.reduce((cartTotal, currentValue) => {
-        const dumbProduct = dumbProducts.find((dumbProduct) => {
-          return currentValue.laptopID === dumbProduct.id;
-        });
-      
-        if (dumbProduct) {
-          const myRam = dumbProduct.RAM.find((objVal) => {
-            return currentValue.ramSize === objVal.size;
-          })?.price;
-      
-          const ramPrice = myRam || 0;
-      
-          const mySSD = dumbProduct.STORAGE.find((objVal) => {
-            return currentValue.ramSize === objVal.size;
-          })?.price;
-      
-          const ssdPrice = mySSD || 0;
-      
-          return cartTotal + ramPrice + ssdPrice;
-        }
-        return cartTotal;
-      }, 0)
-} */
 
 
 while (true) {
     let x = prompt("Enter the operation: \n1)Add to cart \n2)Remove from cart \n3)Calculate \n4)Break ");
-    if (x == "1") {
-        display_cart()
-        let id = prompt("Enter the laptop id:  ");
+    if (x === "1") {
+        console.log("The list of configurations: ")
+        displayconfig()
+        let laptopid = prompt("Enter the laptop id:  ");
         let rams = prompt("Enter the size of ram: ");
         let storage = prompt("Enter the size of storage: ");
-        let id1 = parseInt(id,10);
+        let id1 = parseInt(laptopid,10);
         addToCart(id1, rams, storage);                                      
 
     }
 
-    else if (x == "2") {
+    else if (x === "2") {
         display_cart();
-        let id = prompt("Enter the index to delete: ");
-        let x = parseInt(id,10);
+        let id2 = prompt("Enter the index to delete: ");
+        let x = parseInt(id2,10);
         removeFromCart(x);
         
     }
 
 
-    else if (x == "3") {
+    else if (x === "3") {
         display_cart();
         calculateTotal(cart,Laptops);
     }
 
-    else if (x == "4") {
+    else if (x === "4") {
         break;
     }
 
