@@ -49,12 +49,12 @@ const Laptops = [
 
 
 
-function display_menu() { //To display the contents inside Laptops array
-    for (let i of Laptops) {
-        console.log(i);
-    }
+//function display_menu() { //To display the contents inside Laptops array
+//   for (let i of Laptops) {
+//       console.log(i);
+//    }
 
-}
+//}
 
 
 function display_cart() {
@@ -88,16 +88,23 @@ function addToCart(laptopId, RAMSize, storageSize) {
 }
 
 function removeFromCart(index) {
-            cart.splice(index,1); //Deleting element of array in index 
-            console.log(`The configuration in index ${index} was removed.Your current cart is: `);
-            if (cart.length !=0) {
-                display_cart();
-            }
-            else {
-                console.log("Cart is empty");
-            }
+    if (cart.length < index + 1) {
+        console.log("The index is not found");
+    }
 
+    else {
+        cart.splice(index,1); //Deleting element of array in index 
+        console.log(`The configuration in index ${index} was removed.Your current cart is: `);
+        if (cart.length !=0) {
+            display_cart();
         }
+        else {
+            console.log("Cart is empty");
+        }
+
+    }
+
+    }
 
 
     
