@@ -1,106 +1,55 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Laptop Configurator</title>
-    <style>
-        /* Add your CSS styles here */
-        /* For example, you can style the buttons */
-        button {
-            margin: 5px;
-            padding: 10px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Radio Button</title>
 </head>
-<body>
-    <h1>Laptop Configurator</h1>
+<body>Products:</body>
     <div>
-        <button onclick="displayConfigurations()">Display Configurations</button>
+        <input type="radio" name="size" value="XS" id="xs">
+        <label for="xs">XS</label>
     </div>
-    <div id="configurations"></div>
     <div>
-        <button onclick="addToCartPrompt()">Add to Cart</button>
-        <button onclick="removeFromCartPrompt()">Remove from Cart</button>
-        <button onclick="calculateTotal()">Calculate Total</button>
-        <button onclick="clearCart()">Clear Cart</button>
+        <input type="radio" name="size" value="S" id="s">
+        <label for="s">S</label>
     </div>
-    <div id="cart"></div>
+    <div>
+        <input type="radio" name="size" value="M" id="m">
+        <label for="m">M</label>
+    </div>
+    <div>
+        <input type="radio" name="size" value="L" id="l">
+        <label for="l">L</label>
+    </div>
+    <div>
+        <input type="radio" name="size" value="XL" id="xl">
+        <label for="xl">XL</label>
+    </div>
+    <div>
+        <input type="radio" name="size" value="XXL" id="xxl">
+        <label for="xxl">XXL</label>
+    </div>
+    <p>
+        <button id="btn">Show Selected Value</button>
+    </p>
+
+    <p id="output"></p>
 
     <script>
-        // Your JavaScript code here
-        const cart = [];
-        const laptops = [
-            // Your laptop data here
-        ];
-
-        // Function to display laptop configurations
-        function displayConfigurations() {
-            const configurations = laptops.map(laptop => {
-                // Generate HTML for each laptop configuration
-                const configHTML = `
-                    <div>
-                        <strong>Laptop ID:</strong> ${laptop.id}<br>
-                        <strong>Laptop Name:</strong> ${laptop.name}<br>
-                        <strong>Base Price:</strong> $${laptop.baseprice}<br>
-                        <strong>RAM:</strong> ${laptop.RAM.map(ram => `${ram.size} - $${ram.price}`).join(', ')}<br>
-                        <strong>Storage:</strong> ${laptop.STORAGE.map(storage => `${storage.size} ${storage.type} - $${storage.price}`).join(', ')}<br>
-                    </div><br>
-                `;
-                return configHTML;
-            });
-
-            document.getElementById('configurations').innerHTML = configurations.join('');
-        }
-
-        // Function to prompt for adding to cart
-        function addToCartPrompt() {
-            const laptopId = prompt('Enter the laptop ID:');
-            const ramSize = prompt('Enter RAM size:');
-            const storageSize = prompt('Enter storage size (e.g., 256GB SSD):');
-
-            addToCart(parseInt(laptopId), ramSize, storageSize);
-        }
-
-        // Function to prompt for removing from cart
-        function removeFromCartPrompt() {
-            const index = prompt('Enter the index to remove from cart:');
-            removeFromCart(parseInt(index));
-        }
-
-        // Function to calculate and display the total price
-        function calculateTotal() {
-            const total = cart.reduce((acc, item) => {
-                const laptop = laptops.find(l => l.id === item.laptopId);
-                if (!laptop) return acc;
-
-                const selectedRAM = laptop.RAM.find(ram => ram.size === item.RAM);
-                const selectedStorage = laptop.STORAGE.find(storage => storage.size === item.storage);
-                if (!selectedRAM || !selectedStorage) return acc;
-
-                return acc + laptop.baseprice + selectedRAM.price + selectedStorage.price;
-            }, 0);
-
-            alert(`The total price is $${total}`);
-        }
-
-        // Function to clear the cart
-        function clearCart() {
-            cart.length = 0;
-            displayCart();
-        }
-
-        // Function to display the cart
-        function displayCart() {
-            const cartItems = cart.map((item, index) => {
-                const laptop = laptops.find(l => l.id === item.laptopId);
-                return `<div>${index + 1}. Laptop ID: ${item.laptopId}, RAM: ${item.RAM}, Storage: ${item.storage} <button onclick="removeFromCart(${index})">Remove</button></div>`;
-            });
-
-            document.getElementById('cart').innerHTML = cartItems.join('');
-        }
+        const btn = document.querySelector('#btn');        
+        const radioButtons = document.querySelectorAll('input[name="size"]');
+        btn.addEventListener("click", () => {
+            let selectedSize;
+            for (const radioButton of radioButtons) {
+                if (radioButton.checked) {
+                    selectedSize = radioButton.value;
+                    break;
+                }
+            }
+            // show the output:
+            output.innerText = selectedSize ? `You selected ${selectedSize}` : `You haven't selected any size`;
+        });
     </script>
 </body>
 </html>
