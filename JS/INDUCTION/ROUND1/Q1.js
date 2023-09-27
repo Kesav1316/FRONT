@@ -108,7 +108,7 @@ function removeFromCart(index) {
 
 
     
-function calculateTotal(cart, laptops) {
+/* function calculateTotal(cart, laptops) {
     let total = 0;
         
     for (const item of cart) {
@@ -123,7 +123,7 @@ function calculateTotal(cart, laptops) {
         const selectedStorage = laptop.STORAGE.find(storage => storage.size === item.storage);
         
         if (!selectedRAM) {
-            console.log(`RAM or storage configuration not found`);
+            console.log(`RAM configuration not found`);
             continue;
         }
 
@@ -136,7 +136,44 @@ function calculateTotal(cart, laptops) {
     }
         
     console.log(`The total price is ${total}`);
+} */
+
+
+function calculateTotal(cart, laptops) {
+    let total = 0;
+
+    for (const item of cart) {
+        const laptop = laptops.find(function (l) {
+            return l.id === item.laptopId;
+        });
+
+        if (!laptop) {
+            console.log("Laptop with ID " + item.laptopId + " not found");
+            continue;
+        }
+
+        const selectedRAM = laptop.RAM.find(function (ram) {
+            return ram.size === item.RAM;
+        });
+
+        const selectedStorage = laptop.STORAGE.find(function (storage) {
+            return storage.size === item.storage;
+        });
+
+        if (!selectedRAM) {
+            console.log("RAM configuration not found");
+            continue;
+        } else if (!selectedStorage) {
+            console.log("STORAGE configuration not found");
+            continue;
+        }
+
+        total += laptop.baseprice + selectedRAM.price + selectedStorage.price;
+    }
+
+    console.log("The total price is " + total);
 }
+
 
 
 while (true) {
@@ -145,8 +182,8 @@ while (true) {
         console.log("The list of configurations: ")
         displayconfig()
         let laptopid = prompt("Enter the laptop id:  ");
-        let rams = prompt("Enter the size of ram: ");
-        let storage = prompt("Enter the size of storage: ");
+        let rams = prompt("Enter the size of ram: ").toUpperCase();
+        let storage = prompt("Enter the size of storage: ").toUpperCase();
         let id1 = parseInt(laptopid,10);
         addToCart(id1, rams, storage);                                      
 
