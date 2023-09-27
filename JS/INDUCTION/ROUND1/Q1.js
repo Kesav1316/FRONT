@@ -108,73 +108,35 @@ function removeFromCart(index) {
 
 
     
-/* function calculateTotal(cart, laptops) {
+function calculateTotal(cart, menu) {
     let total = 0;
         
     for (const item of cart) {
-        const laptop = laptops.find(l => l.id === item.laptopId);
+        const laptop_ID = menu.find(l => l.id === item.laptopId);
         
-        if (!laptop) {
+        if (!laptop_ID) {
                 console.log(`Laptop with ID ${item.laptopId} not found`);
                 continue;
             }
         
-        const selectedRAM = laptop.RAM.find(ram => ram.size === item.RAM);
-        const selectedStorage = laptop.STORAGE.find(storage => storage.size === item.storage);
+        const selected_RAM = laptop_ID.RAM.find(ram => ram.size === item.RAM);
+        const selected_STORAGE = laptop_ID.STORAGE.find(storage => storage.size === item.storage);
         
-        if (!selectedRAM) {
+        if (!selected_RAM) {
             console.log(`RAM configuration not found`);
             continue;
         }
 
-        else if (!selectedStorage) {
+        else if (!selected_STORAGE) {
             console.log(`STORAGE configuration not found`);
             continue;
         }
         
-        total += laptop.baseprice + selectedRAM.price + selectedStorage.price;
+        total += laptop_ID.baseprice + selected_RAM.price + selected_STORAGE.price;
     }
         
     console.log(`The total price is ${total}`);
-} */
-
-
-function calculateTotal(cart, laptops) {
-    let total = 0;
-
-    for (const item of cart) {
-        const laptop = laptops.find(function (l) {
-            return l.id === item.laptopId;
-        });
-
-        if (!laptop) {
-            console.log("Laptop with ID " + item.laptopId + " not found");
-            continue;
-        }
-
-        const selectedRAM = laptop.RAM.find(function (ram) {
-            return ram.size === item.RAM;
-        });
-
-        const selectedStorage = laptop.STORAGE.find(function (storage) {
-            return storage.size === item.storage;
-        });
-
-        if (!selectedRAM) {
-            console.log("RAM configuration not found");
-            continue;
-        } else if (!selectedStorage) {
-            console.log("STORAGE configuration not found");
-            continue;
-        }
-
-        total += laptop.baseprice + selectedRAM.price + selectedStorage.price;
-    }
-
-    console.log("The total price is " + total);
-}
-
-
+} 
 
 while (true) {
     let x = prompt("Enter the operation: \n1)Add to cart \n2)Remove from cart \n3)Calculate \n4)Break ");
